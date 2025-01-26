@@ -1,26 +1,24 @@
 #!/usr/bin/python3
 """
-Main file
+0-main
 """
 
 
-def makeChange(coins, total):
+def island_perimeter(grid):
     """
-    make change of coins
+    perimeter is the number of island
     """
-    if total <= 0:
-        return 0
-    remainder = total
-    coins_needed = 0
-    coin_index = 0
-    sorted_coins_list = sorted(coins, reverse=True)
-    list_len = len(coins)
-    while remainder > 0:
-        if coin_index >= list_len:
-            return -1
-        if remainder - sorted_coins_list[coin_index] >= 0:
-            remainder -= sorted_coins_list[coin_index]
-            coins_needed += 1
-        else:
-            coin_index += 1
-    return coins_needed
+    perimeter = 0
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                if i > 0 and grid[i - 1][j] == 1:
+                    perimeter -= 1
+                if i < len(grid) - 1 and grid[i+1][j] == 1:
+                    perimeter -= 1
+                if j > 0 and grid[i][j-1] == 1:
+                    perimeter -= 1
+                if j < len(grid[0]) - 1 and grid[i][j + 1] == 1:
+                    perimeter -= 1
+    return perimeter
